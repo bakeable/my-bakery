@@ -9,6 +9,7 @@ rm -r sql
 # Get to client directory
 cd client
 npm run build
+npm run export
 cd ../
 
 # Tear down compose
