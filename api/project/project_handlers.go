@@ -3,6 +3,7 @@ package project
 import (
 	"context"
 	"my-bakery/database"
+	"my-bakery/utils"
 	"net/http"
 
 	"github.com/georgysavva/scany/v2/sqlscan"
@@ -20,7 +21,9 @@ func Add(c *gin.Context, db *database.DB) {
 		return
 	}
 
-	_, err := db.Exec("INSERT INTO "+tableName+" (customer_id, description, name, wage) VALUES (?, ?, ?, ?)", entity.CustomerId, entity.Description, entity.Name, entity.Wage)
+	query := "INSERT INTO projects (customer_id, description, name, progress, status, wage) VALUES (?, ?, ?, ?, ?, ?)"
+
+	_, err := db.Exec(query, entity.CustomerId, entity.Description, entity.Name, entity.Progress, entity.Status, utils.ConvertToFloat64(entity.Wage))
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
@@ -49,6 +52,11 @@ func Get(c *gin.Context, db *database.DB) {
 	ctx := context.Background()
 	var entities []*Project
 	sqlscan.Select(ctx, db, &entities, query)
+
+	if len(entities) == 0 {
+		c.JSON(http.StatusNotFound, gin.H{"error": "Project not found"})
+		return
+	}
 
 	c.JSON(http.StatusOK, entities[0])
 }

@@ -94,7 +94,7 @@ const TableProjects = () => {
                 <UserAvatar username={project.name} className="w-24 h-24 mx-auto lg:w-6 lg:h-6" />
               </td>
               <td data-label="Name">{project.name}</td>
-              <td data-label="Company">{project.company}</td>
+              <td data-label="Company">{project.customer_name}</td>
               <td data-label="Status">{project.status}</td>
               <td data-label="Progress" className="lg:w-32">
                 <progress
@@ -106,7 +106,7 @@ const TableProjects = () => {
                 </progress>
               </td>
               <td data-label="Started">
-                <small className="text-gray-500 dark:text-slate-400">{new Date(project.project_started_timestamp || Date.now()).toLocaleDateString()}</small>
+                <small className="text-gray-500 dark:text-slate-400">{new Date(project.created_timestamp || Date.now()).toLocaleDateString()}</small>
               </td>
               <td className="before:hidden lg:w-1 whitespace-nowrap">
                 <Buttons type="justify-start lg:justify-end" noWrap>

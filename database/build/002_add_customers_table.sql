@@ -1,6 +1,7 @@
 USE mydb;
 CREATE TABLE IF NOT EXISTS customers (
     id INT AUTO_INCREMENT PRIMARY KEY,
+    created_timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     name VARCHAR(255) NOT NULL,
     relation_number INT NOT NULL
 );
