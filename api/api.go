@@ -1,7 +1,7 @@
 package api
 
 import (
-	"my-bakery/api/client"
+	"my-bakery/api/customer"
 	"my-bakery/api/project"
 	"my-bakery/database"
 
@@ -14,5 +14,5 @@ func InitRoutes(r *gin.Engine, db *database.DB) {
 	project.InitRoutes(r, db)
 
 	// Initialize routes for Client
-	client.InitRoutes(r, db)
+	customer.InitRoutes(r, db)
 }

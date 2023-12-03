@@ -1,4 +1,4 @@
-package client
+package customer
 
 import (
 	"my-bakery/database"
@@ -7,15 +7,15 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-// addClient handles POST requests to add a new client
-func AddClient(c *gin.Context, db *database.DB) {
-	var p Client
+// addCustomer handles POST requests to add a new customer
+func AddCustomer(c *gin.Context, db *database.DB) {
+	var p Customer
 	if err := c.ShouldBindJSON(&p); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
 
-	_, err := db.Exec("INSERT INTO clients (name, relation_number) VALUES (?, ?)", p.Name, p.RelationNumber)
+	_, err := db.Exec("INSERT INTO customers (name, relation_number) VALUES (?, ?)", p.Name, p.RelationNumber)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
@@ -24,24 +24,24 @@ func AddClient(c *gin.Context, db *database.DB) {
 	c.Status(http.StatusCreated)
 }
 
-// getClients handles GET requests to retrieve clients
-func GetClients(c *gin.Context, db *database.DB) {
-	rows, err := db.Query("SELECT id, name, relation_number FROM clients")
+// getCustomers handles GET requests to retrieve customers
+func GetCustomers(c *gin.Context, db *database.DB) {
+	rows, err := db.Query("SELECT id, name, relation_number FROM customers")
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}
 	defer rows.Close()
 
-	var clients []Client
+	var customers []Customer
 	for rows.Next() {
-		var p Client
+		var p Customer
 		err := rows.Scan(&p.ID, &p.Name, &p.RelationNumber)
 		if err != nil {
 			c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 			return
 		}
-		clients = append(clients, p)
+		customers = append(customers, p)
 	}
 
 	if err := rows.Err(); err != nil {
@@ -49,5 +49,5 @@ func GetClients(c *gin.Context, db *database.DB) {
 		return
 	}
 
-	c.JSON(http.StatusOK, clients)
+	c.JSON(http.StatusOK, customers)
 }

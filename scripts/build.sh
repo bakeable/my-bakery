@@ -6,6 +6,11 @@ cd "$SCRIPT_DIR/.."
 # Remove SQL data
 rm -r sql
 
+# Get to client directory
+cd client
+npm run build
+cd ../
+
 # Tear down compose
 docker-compose down -v
 

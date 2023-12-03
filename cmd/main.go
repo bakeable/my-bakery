@@ -3,6 +3,7 @@ package main
 import (
 	"my-bakery/api"
 	"my-bakery/database"
+	"net/http"
 
 	"github.com/gin-gonic/gin"
 )
@@ -13,6 +14,8 @@ func main() {
 
 	r := gin.Default()
 	api.InitRoutes(r, db)
+
+	r.StaticFS("/app", http.Dir("./static"))
 
 	r.Run(":4040")
 }

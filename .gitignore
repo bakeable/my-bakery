@@ -1,2 +1,5 @@
 # Ignore everything in this directory
 sql
+client/.next/**
+**/node_modules/**
+

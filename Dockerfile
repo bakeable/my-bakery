@@ -14,6 +14,9 @@ RUN go mod download
 # Copy the source code into the container
 COPY . .
 
+# Copy static assets from Next.js build
+COPY client/.next/static /app/static
+
 # Build the application
 RUN go build -o my-bakery ./cmd 
 

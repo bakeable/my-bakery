@@ -1,6 +1,6 @@
-package client
+package customer
 
-type Client struct {
+type Customer struct {
 	ID             int    `json:"id"`
 	Name           string `json:"name"`
 	RelationNumber int    `json:"relation_number"`
