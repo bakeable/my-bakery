@@ -6,12 +6,24 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func InitRoutes(r *gin.Engine, db *database.DB) {
-	r.POST("/project", func(c *gin.Context) {
-		AddProject(c, db)
-	})
+func InitRoutes(r *gin.RouterGroup, db *database.DB) {
 
-	r.GET("/project", func(c *gin.Context) {
-		GetProjects(c, db)
-	})
+	group := r.Group("/project")
+	{
+		group.POST("", func(c *gin.Context) {
+			Add(c, db)
+		})
+		group.GET("", func(c *gin.Context) {
+			GetAll(c, db)
+		})
+		group.GET("/:id", func(c *gin.Context) {
+			Get(c, db)
+		})
+		group.PUT("/:id", func(c *gin.Context) {
+			Update(c, db)
+		})
+		group.DELETE("/:id", func(c *gin.Context) {
+			Delete(c, db)
+		})
+	}
 }

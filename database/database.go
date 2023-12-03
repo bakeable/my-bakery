@@ -1,10 +1,12 @@
 package database
 
 import (
+	"context"
 	"database/sql"
 	"fmt"
 	"time"
 
+	"github.com/georgysavva/scany/v2/sqlscan"
 	_ "github.com/go-sql-driver/mysql"
 )
 
@@ -29,4 +31,20 @@ func InitDB() *DB {
 		time.Sleep(10 * time.Second) // Wait for 5 seconds before retrying
 	}
 	panic("Failed to connect to database: " + err.Error())
+}
+
+func GetOne(db *DB, query string, output *any) *any {
+	ctx := context.Background()
+
+	sqlscan.Select(ctx, db, &output, query)
+
+	return output
+}
+
+func (db *DB) GetMultiple(query string, output []*any) []*any {
+	ctx := context.Background()
+
+	sqlscan.Select(ctx, db, &output, query)
+
+	return output
 }

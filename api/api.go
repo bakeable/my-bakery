@@ -9,7 +9,7 @@ import (
 )
 
 // InitRoutes initializes all routes for different models
-func InitRoutes(r *gin.Engine, db *database.DB) {
+func InitRoutes(r *gin.RouterGroup, db *database.DB) {
 	// Initialize routes for Project
 	project.InitRoutes(r, db)
 

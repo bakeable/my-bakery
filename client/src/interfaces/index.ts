@@ -1,3 +1,7 @@
+import { Project, Customer } from './entities'
+
+export type { Project, Customer }
+
 export type UserPayloadObject = {
   name: string
   email: string

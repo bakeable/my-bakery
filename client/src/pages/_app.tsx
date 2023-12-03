@@ -20,11 +20,11 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
   // Use the layout defined at the page level, if available
   const getLayout = Component.getLayout || ((page) => page)
 
-  const title = `Admin One React Tailwind free`
+  const title = `My Bakery`
 
-  const description = 'Admin One - free React Next Tailwind dashboard with TypeScript and dark mode'
+  const description = 'Time tracking, invoicing, and payments for freelancers by BakeAble'
 
-  const url = 'https://justboil.github.io/admin-one-react-tailwind/'
+  const url = 'https://github.com/bakeable/my-bakery'
 
   const image = `https://static.justboil.me/templates/one/repo-tailwind-react.png`
 
@@ -40,7 +40,7 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
             <meta name="description" content={description} />
 
             <meta property="og:url" content={url} />
-            <meta property="og:site_name" content="JustBoil.me" />
+            <meta property="og:site_name" content="BakeAble.nl" />
             <meta property="og:title" content={title} />
             <meta property="og:description" content={description} />
             <meta property="og:image" content={image} />
@@ -55,22 +55,22 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
             <meta property="twitter:image:width" content={imageWidth} />
             <meta property="twitter:image:height" content={imageHeight} />
 
-            <link rel="icon" href="/admin-one-react-tailwind/favicon.png" />
+            <link rel="icon" href="/favicon.png" />
           </Head>
 
-          <Script
+          {/* <Script
             src="https://www.googletagmanager.com/gtag/js?id=UA-130795909-1"
             strategy="afterInteractive"
-          />
+          /> */}
 
-          <Script id="google-analytics" strategy="afterInteractive">
+          {/* <Script id="google-analytics" strategy="afterInteractive">
             {`
               window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments);}
               gtag('js', new Date());
               gtag('config', 'UA-130795909-1');
             `}
-          </Script>
+          </Script> */}
 
           <Component {...pageProps} />
         </>

@@ -88,7 +88,7 @@ const UiPage = () => {
         <title>{getPageTitle('UI')}</title>
       </Head>
 
-      <SectionTitle first>Dark mode</SectionTitle>
+      <SectionTitle icon={''} title={''}>Dark mode</SectionTitle>
 
       <SectionMain>
         <CardBox className="md:w-7/12 lg:w-5/12 xl:w-4/12 shadow-2xl md:mx-auto">
@@ -98,7 +98,7 @@ const UiPage = () => {
         </CardBox>
       </SectionMain>
 
-      <SectionTitle>Modal examples</SectionTitle>
+      <SectionTitle icon={''} title={''}>Modal examples</SectionTitle>
 
       <CardBoxModal
         title="Please confirm action"
@@ -178,7 +178,7 @@ const UiPage = () => {
       <Formik initialValues={{ outline: false }} onSubmit={() => null}>
         {({ values }) => (
           <>
-            <SectionTitle custom>
+            <SectionTitle icon={''} title={''}>
               <h1 className="text-2xl text-gray-500 dark:text-slate-400">Notifications</h1>
               <div className="flex items-center justify-center mt-6">
                 <FormCheckRadio type="switch" label="Outline">
@@ -264,7 +264,7 @@ const UiPage = () => {
         )}
       </Formik>
 
-      <SectionTitle>Buttons</SectionTitle>
+      <SectionTitle icon={''} title={''}>Buttons</SectionTitle>
 
       <SectionMain>
         <CardBox>
@@ -459,7 +459,7 @@ const UiPage = () => {
         </CardBox>
       </SectionMain>
 
-      <SectionTitle>Pills</SectionTitle>
+      <SectionTitle icon={''} title={''}>Pills</SectionTitle>
 
       <SectionMain>
         <CardBox>
@@ -524,7 +524,7 @@ const UiPage = () => {
         </CardBox>
       </SectionMain>
 
-      <SectionTitle>Cards</SectionTitle>
+      <SectionTitle icon={''} title={''}>Cards</SectionTitle>
 
       <SectionMain>
         <div className="grid grid-cols-1 gap-6 mb-6 lg:grid-cols-2">

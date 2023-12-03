@@ -5,6 +5,7 @@ import LayoutAuthenticated from '../layouts/Authenticated'
 import SectionMain from '../components/Section/Main'
 import SectionTitle from '../components/Section/Title'
 import { appTitle, getPageTitle } from '../config'
+import { mdiSnowmobile } from '@mdi/js'
 
 const ResponsivePage = () => {
   return (
@@ -13,7 +14,7 @@ const ResponsivePage = () => {
         <title>{getPageTitle('Responsive')}</title>
       </Head>
 
-      <SectionTitle first>Mobile & Tablet</SectionTitle>
+      <SectionTitle icon={mdiSnowmobile} title="Mobile & Tablet"></SectionTitle>
 
       <SectionMain>
         <div className="md:w-10/12 shadow-2xl md:mx-auto rounded-3xl border-8 border-white overflow-hidden">
@@ -27,7 +28,7 @@ const ResponsivePage = () => {
         </div>
       </SectionMain>
 
-      <SectionTitle>Small laptop 1024px</SectionTitle>
+      <SectionTitle icon={mdiSnowmobile} title="Mobile & Tablet"></SectionTitle>
 
       <SectionMain>
         <div className="md:w-10/12 shadow-2xl md:mx-auto rounded-3xl border-8 border-white overflow-hidden">
@@ -53,7 +54,7 @@ const ResponsivePage = () => {
         </div>
       </SectionMain>
 
-      <SectionTitle>Laptop & desktop</SectionTitle>
+      <SectionTitle icon={mdiSnowmobile} title="Mobile & Tablet"></SectionTitle>
 
       <SectionMain>
         <div className="md:w-10/12 shadow-2xl md:mx-auto rounded-3xl border-8 border-white overflow-hidden">

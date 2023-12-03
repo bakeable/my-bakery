@@ -15,7 +15,7 @@ RUN go mod download
 COPY . .
 
 # Copy static assets from Next.js build
-COPY client/out /app/static
+COPY client/out /app/client/out
 
 # Build the application
 RUN go build -o my-bakery ./cmd 

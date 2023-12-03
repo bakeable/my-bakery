@@ -3,7 +3,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "export": "next output: export",
+    "export": "next export",
     "start": "next start",
     "lint": "next lint",
     "format": "prettier 'src/**/*.{tsx,ts,js}' --write"
