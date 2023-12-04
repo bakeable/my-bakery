@@ -10,7 +10,6 @@ CREATE TABLE IF NOT EXISTS tasks (
     created_timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     finished_timestamp DATETIME DEFAULT NULL,
     priority INT,
-    due_date DATE NULL,
     started_timestamp DATETIME DEFAULT NULL,
     hours DECIMAL(10,2) NULL,
     FOREIGN KEY (project_id) REFERENCES projects(id)

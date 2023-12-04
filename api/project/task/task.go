@@ -5,7 +5,6 @@ type Task struct {
 	CreatedTimestamp  string  `json:"created_timestamp" insert:"false" retrieve:"true"`
 	CommitId          string  `json:"commit_id" insert:"true" retrieve:"true"`
 	Description       string  `json:"description" insert:"true" retrieve:"true"`
-	DueDate           string  `json:"due_date" insert:"true" retrieve:"true"`
 	EarnedAmount      float64 `json:"earned_amount" insert:"false" retrieve:"true"`
 	FinishedTimestamp string  `json:"finished_timestamp" insert:"true" retrieve:"true"`
 	Hours             float64 `json:"hours" insert:"true" retrieve:"true"`
