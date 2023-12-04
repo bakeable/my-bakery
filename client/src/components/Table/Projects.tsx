@@ -4,9 +4,10 @@ import { Client, Project } from '../../interfaces'
 import Button from '../Button'
 import Buttons from '../Buttons'
 import CardBoxModal from '../CardBox/Modal'
-import UserAvatar from '../UserAvatar'
+import UserAvatar from '../Avatar/UserAvatar'
 import { useRouter } from 'next/router'
 import { api } from '../../api'
+import ProjectAvatar from '../Avatar/ProjectAvatar'
 
 const TableProjects = () => {
   const router = useRouter()
@@ -91,7 +92,7 @@ const TableProjects = () => {
           {projectsPaginated.map((project: Project) => (
             <tr key={project.id}>
               <td className="border-b-0 lg:w-6 before:hidden">
-                <UserAvatar username={project.name} className="w-24 h-24 mx-auto lg:w-6 lg:h-6" />
+                <ProjectAvatar projectName={project.name} className="w-24 h-24 mx-auto lg:w-6 lg:h-6" />
               </td>
               <td data-label="Name">{project.name}</td>
               <td data-label="Company">{project.customer_name}</td>

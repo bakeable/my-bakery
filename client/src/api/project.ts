@@ -15,7 +15,7 @@ export const createProject = async (data: any) => {
     const res = await fetch(`${endpoint}/project`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
+        body: JSON.stringify(serialize(data)),
     })
     return res
 }
@@ -25,7 +25,7 @@ export const updateProject = async (id: string, data: any) => {
     const res = await fetch(`${endpoint}/project/${id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
+        body: JSON.stringify(serialize(data)),
     })
     return res
 }
@@ -37,3 +37,17 @@ export const deleteProject = async (id: string) => {
     })
     return res
 }
+
+const serialize = (obj: any) => {
+    return {
+        ...obj,
+        customer_id: parseInt(obj.customer_id),
+    }
+}
+
+export const enumStatus = Object.freeze({
+    CONCEPT: 'concept',
+    ACTIVE: 'active',
+    INACTIVE: 'inactive',
+    DONE: 'done',
+})

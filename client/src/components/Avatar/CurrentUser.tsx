@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react'
 import { useAppSelector } from '../../stores/hooks'
-import UserAvatar from '.'
+import UserAvatar from './UserAvatar'
 
 type Props = {
   className?: string

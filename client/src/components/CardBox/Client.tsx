@@ -3,7 +3,7 @@ import React from 'react'
 import { Client } from '../../interfaces'
 import CardBox from '.'
 import PillTag from '../PillTag'
-import UserAvatar from '../UserAvatar'
+import UserAvatar from '../Avatar/UserAvatar'
 
 type Props = {
   client: Client

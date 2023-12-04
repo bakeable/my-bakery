@@ -1,4 +1,4 @@
-import { mdiAccount, mdiBallotOutline, mdiBook, mdiCursorDefault, mdiGithub, mdiMail, mdiUpload } from '@mdi/js'
+import { mdiAccount, mdiBallotOutline, mdiBook, mdiCurrencyEur, mdiCursorDefault, mdiGithub, mdiImageText, mdiMail, mdiRayStartVertexEnd, mdiUpload } from '@mdi/js'
 import { Field, Form, Formik } from 'formik'
 import Head from 'next/head'
 import { ReactElement, useEffect, useState } from 'react'
@@ -16,6 +16,7 @@ import { getPageTitle } from '../../config'
 import { useRouter } from 'next/router'
 import { Project } from '../../interfaces'
 import { api } from '../../api'
+import CustomerDropdown from '../../components/DropDown/CustomerDropDown'
 
 const FormsPage = () => {
   const router = useRouter()
@@ -56,16 +57,26 @@ const FormsPage = () => {
                 <Field name="name" placeholder="Geef het project een naam" />
               </FormField>
 
-              <FormField label="Klant" labelFor="customer">
-                <Field name="customer" id="customer" component="select">
-                  <option value="1">Bordex Group</option>
-                  <option value="2">MultiMediaMarkers</option>
-                </Field>
+              <Field name="customer_id">
+                {(props) => (
+                  <CustomerDropdown
+                    label="Klant"
+                    labelFor="customer_id"
+                    name={props.field.name}
+                    id="customer_id"
+                  />
+                )}
+              </Field>
+
+              <Divider />
+
+              <FormField label="Uurloon (excl. BTW)" icons={[mdiCurrencyEur]}>
+                <Field type="number" name="wage" placeholder="Stel het afgesproken uurloon in" />
               </FormField>
 
               <Divider />
 
-              <FormField label="Status" labelFor="status">
+              <FormField label="Status" labelFor="status" icons={[mdiRayStartVertexEnd]}>
                 <Field name="status" id="status" component="select">
                   <option value="concept">Concept</option>
                   <option value="active">Actief</option>

@@ -3,6 +3,7 @@ package api
 import (
 	"my-bakery/api/customer"
 	"my-bakery/api/project"
+	"my-bakery/api/work_session"
 	"my-bakery/database"
 
 	"github.com/gin-gonic/gin"
@@ -13,6 +14,9 @@ func InitRoutes(r *gin.RouterGroup, db *database.DB) {
 	// Initialize routes for Project
 	project.InitRoutes(r, db)
 
-	// Initialize routes for Client
+	// Initialize routes for Customer
 	customer.InitRoutes(r, db)
+
+	// Initialize routes for Client
+	work_session.InitRoutes(r, db)
 }

@@ -2,7 +2,9 @@ package customer
 
 import (
 	"context"
+	"fmt"
 	"my-bakery/database"
+	"my-bakery/utils"
 	"net/http"
 
 	"github.com/georgysavva/scany/v2/sqlscan"
@@ -20,7 +22,9 @@ func Add(c *gin.Context, db *database.DB) {
 		return
 	}
 
-	_, err := db.Exec("INSERT INTO "+tableName+" (name, relation_number) VALUES (?, ?)", entity.Name, entity.RelationNumber)
+	query, values := utils.SQL_INSERT(entity, tableName)
+
+	_, err := db.Exec(query, values...)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
@@ -31,28 +35,12 @@ func Add(c *gin.Context, db *database.DB) {
 
 // GetAll handles GET requests to retrieve entities
 func GetAll(c *gin.Context, db *database.DB) {
-	rows, err := db.Query("SELECT id, name, relation_number FROM " + tableName)
-	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
-		return
-	}
-	defer rows.Close()
+	query := utils.SQL_SELECT(Customer{}, "customers")
+	fmt.Println(query)
 
-	var entities []Customer
-	for rows.Next() {
-		var entity Customer
-		err := rows.Scan(&entity.ID, &entity.Name, &entity.RelationNumber)
-		if err != nil {
-			c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
-			return
-		}
-		entities = append(entities, entity)
-	}
-
-	if err := rows.Err(); err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
-		return
-	}
+	ctx := context.Background()
+	var entities []*Customer
+	sqlscan.Select(ctx, db, &entities, query)
 
 	c.JSON(http.StatusOK, entities)
 }
@@ -61,11 +49,16 @@ func GetAll(c *gin.Context, db *database.DB) {
 func Get(c *gin.Context, db *database.DB) {
 	entityId := c.Param("id")
 
-	query := "SELECT id, name, relation_number FROM " + tableName + " WHERE id = " + entityId
+	query := utils.SQL_SELECT_BY_ID(Customer{}, "customers", entityId)
 
 	ctx := context.Background()
 	var entities []*Customer
 	sqlscan.Select(ctx, db, &entities, query)
+
+	if len(entities) == 0 {
+		c.JSON(http.StatusNotFound, gin.H{"error": "Customer not found"})
+		return
+	}
 
 	c.JSON(http.StatusOK, entities[0])
 }
@@ -74,7 +67,9 @@ func Get(c *gin.Context, db *database.DB) {
 func Delete(c *gin.Context, db *database.DB) {
 	entityId := c.Param("id")
 
-	_, err := db.Exec("DELETE FROM "+tableName+" WHERE id = ?", entityId)
+	query := utils.SQL_DELETE_BY_ID(tableName, entityId)
+
+	_, err := db.Exec(query)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
@@ -103,9 +98,11 @@ func Update(c *gin.Context, db *database.DB) {
 		return
 	}
 
+	// Get query and values
+	query, values := utils.SQL_UPDATE_BY_ID(updatedEntity, tableName, entityId)
+
 	// Update the entity in the database
-	_, err = db.Exec("UPDATE "+tableName+" SET name = ?, relation_number = ? WHERE id = ?",
-		updatedEntity.Name, updatedEntity.RelationNumber, entityId)
+	_, err = db.Exec(query, values...)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return

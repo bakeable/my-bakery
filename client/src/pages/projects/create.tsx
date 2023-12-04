@@ -22,7 +22,12 @@ const FormsPage = () => {
   const { projectId } = router.query as { projectId: string}
 
   // Define state to hold the project data
-  const [project, setProject] = useState<Partial<Project>>({});
+  const [project, setProject] = useState<Partial<Project>>({
+    customer_id: null,
+    description: '',
+    name: '',
+    status: 'concept',
+  });
 
   // Use useEffect to fetch the project data when projectId changes
   useEffect(() => {
@@ -58,8 +63,8 @@ const FormsPage = () => {
 
               <FormField label="Klant" labelFor="customer">
                 <Field name="customer" id="customer" component="select">
-                  <option value="1">Bordex Group</option>
-                  <option value="2">MultiMediaMarkers</option>
+                  <option value={1}>Bordex Group</option>
+                  <option value={2}>MultiMediaMarkers</option>
                 </Field>
               </FormField>
 

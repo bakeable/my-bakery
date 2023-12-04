@@ -4,7 +4,7 @@ import { useAppSelector } from '../../stores/hooks'
 import CardBox from '.'
 import FormCheckRadio from '../Form/CheckRadio'
 import PillTag from '../PillTag'
-import UserAvatarCurrentUser from '../UserAvatar/CurrentUser'
+import UserAvatarCurrentUser from '../Avatar/CurrentUser'
 
 type Props = {
   className?: string

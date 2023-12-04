@@ -1,4 +1,4 @@
-import { mdiPlus, mdiTableBorder } from '@mdi/js'
+import { mdiBallotOutline, mdiPlus } from '@mdi/js'
 import Head from 'next/head'
 import React, { ReactElement } from 'react'
 import LayoutAuthenticated from '../../layouts/Authenticated'
@@ -17,7 +17,7 @@ const ProjectsPage = () => {
         <title>{getPageTitle(pageName)}</title>
       </Head>
       <SectionMain>
-        <SectionTitleLineWithButton icon={mdiTableBorder} title={pageName} main>
+        <SectionTitleLineWithButton icon={mdiBallotOutline} title={pageName} main>
           <Button
             icon={mdiPlus}
             label="Project aanmaken"

@@ -38,7 +38,7 @@ const FormsPage = () => {
   return (
     <>
       <Head>
-        <title>{getPageTitle('Forms')}</title>
+        <title>{getPageTitle('Nieuwe klant')}</title>
       </Head>
 
       <SectionMain>
@@ -52,32 +52,14 @@ const FormsPage = () => {
             onSubmit={(values) => api.createCustomer(values).then(() => router.push('/customers'))}
           >
             <Form>
-              <FormField label="Customernaam" icons={[mdiBook]}>
-                <Field name="name" placeholder="Geef het customer een naam" />
-              </FormField>
-
-              <FormField label="Klant" labelFor="customer">
-                <Field name="customer" id="customer" component="select">
-                  <option value="1">Bordex Group</option>
-                  <option value="2">MultiMediaMarkers</option>
-                </Field>
-              </FormField>
-
-              <Divider />
-
-              <FormField label="Status" labelFor="status">
-                <Field name="status" id="status" component="select">
-                  <option value="concept">Concept</option>
-                  <option value="active">Actief</option>
-                  <option value="inactive">Inactief</option>
-                  <option value="done">Afgerond</option>
-                </Field>
+              <FormField label="Klantnaam" icons={[mdiBook]}>
+                <Field name="name" placeholder="Geef de klant een naam" />
               </FormField>
 
               <Divider />
 
               <FormField label="Beschrijving" hasTextareaHeight>
-                <Field name="description" as="textarea" placeholder="Beschrijf het doel van het customer" />
+                <Field name="description" as="textarea" placeholder="Beschrijf de klant" />
               </FormField>
 
               <Divider />

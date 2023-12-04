@@ -1,4 +1,4 @@
-package project
+package work_session
 
 import (
 	"context"
@@ -12,11 +12,11 @@ import (
 )
 
 // Variable declaration
-const tableName = "projects"
+const tableName = "work_sessions"
 
 // Add handles POST requests to add a new entity
 func Add(c *gin.Context, db *database.DB) {
-	var entity Project
+	var entity WorkSession
 	if err := c.ShouldBindJSON(&entity); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
@@ -35,11 +35,11 @@ func Add(c *gin.Context, db *database.DB) {
 
 // GetAll handles GET requests to retrieve entities
 func GetAll(c *gin.Context, db *database.DB) {
-	query := utils.SQL_SELECT(Project{}, "project_customer_view")
+	query := utils.SQL_SELECT(WorkSession{}, "work_session_project_view")
 	fmt.Println(query)
 
 	ctx := context.Background()
-	var entities []*Project
+	var entities []*WorkSession
 	sqlscan.Select(ctx, db, &entities, query)
 
 	c.JSON(http.StatusOK, entities)
@@ -49,21 +49,21 @@ func GetAll(c *gin.Context, db *database.DB) {
 func Get(c *gin.Context, db *database.DB) {
 	entityId := c.Param("id")
 
-	query := utils.SQL_SELECT_BY_ID(Project{}, "project_customer_view", entityId)
+	query := utils.SQL_SELECT_BY_ID(WorkSession{}, "work_session_project_view", entityId)
 
 	ctx := context.Background()
-	var entities []*Project
+	var entities []*WorkSession
 	sqlscan.Select(ctx, db, &entities, query)
 
 	if len(entities) == 0 {
-		c.JSON(http.StatusNotFound, gin.H{"error": "Project not found"})
+		c.JSON(http.StatusNotFound, gin.H{"error": "WorkSession not found"})
 		return
 	}
 
 	c.JSON(http.StatusOK, entities[0])
 }
 
-// deleteProject handles DELETE requests to delete a specific entity by ID
+// deleteWorkSession handles DELETE requests to delete a specific entity by ID
 func Delete(c *gin.Context, db *database.DB) {
 	entityId := c.Param("id")
 
@@ -83,16 +83,16 @@ func Update(c *gin.Context, db *database.DB) {
 	entityId := c.Param("id")
 
 	// Check if the entity with the given ID exists
-	var existingEntity Project
+	var existingEntity WorkSession
 	err := db.QueryRow("SELECT id FROM "+tableName+" WHERE id = ?", entityId).
 		Scan(&existingEntity.ID)
 	if err != nil {
-		c.JSON(http.StatusNotFound, gin.H{"error": "Project not found"})
+		c.JSON(http.StatusNotFound, gin.H{"error": "WorkSession not found"})
 		return
 	}
 
-	// Bind the request body to a Project struct to get updated data
-	var updatedEntity Project
+	// Bind the request body to a WorkSession struct to get updated data
+	var updatedEntity WorkSession
 	if err := c.ShouldBindJSON(&updatedEntity); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return

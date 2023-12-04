@@ -62,7 +62,7 @@ const DashboardPage = () => {
             color="contrast"
             roundedFull
             small
-            onClick={() => router.push('/sessions/create')}
+            onClick={() => router.push('/work_sessions/create')}
           />
         </SectionTitleLineWithButton>
 
