@@ -2,7 +2,6 @@ package project
 
 import (
 	"context"
-	"fmt"
 	"my-bakery/database"
 	"my-bakery/utils"
 	"net/http"
@@ -36,7 +35,6 @@ func Add(c *gin.Context, db *database.DB) {
 // GetAll handles GET requests to retrieve entities
 func GetAll(c *gin.Context, db *database.DB) {
 	query := utils.SQL_SELECT(Project{}, "project_customer_view")
-	fmt.Println(query)
 
 	ctx := context.Background()
 	var entities []*Project

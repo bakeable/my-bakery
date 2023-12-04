@@ -9,7 +9,7 @@ import NumberDynamic from '../NumberDynamic'
 import PillTagTrend from '../PillTag/Trend'
 
 type Props = {
-  number: number
+  number: number | string
   numberPrefix?: string
   numberSuffix?: string
   icon: string

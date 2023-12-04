@@ -21,7 +21,9 @@ export type WorkSession = {
   project_id: number
   created_timestamp: string
   started_timestamp: string
+  start_time: string
   finished_timestamp: string
+  finish_time: string
   hours: number
   earned_amount: number
 }

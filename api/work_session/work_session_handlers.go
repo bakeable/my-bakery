@@ -2,7 +2,6 @@ package work_session
 
 import (
 	"context"
-	"fmt"
 	"my-bakery/database"
 	"my-bakery/utils"
 	"net/http"
@@ -14,32 +13,47 @@ import (
 // Variable declaration
 const tableName = "work_sessions"
 
-// Add handles POST requests to add a new entity
-func Add(c *gin.Context, db *database.DB) {
+func AddWorkSession(c *gin.Context, db *database.DB) {
 	var entity WorkSession
 	if err := c.ShouldBindJSON(&entity); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
 
+	Add(c, db, entity)
+}
+
+// Add handles POST requests to add a new entity
+func Add(c *gin.Context, db *database.DB, entity interface{}) {
 	query, values := utils.SQL_INSERT(entity, tableName)
 
-	_, err := db.Exec(query, values...)
+	result, err := db.Exec(query, values...)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}
 
-	c.Status(http.StatusCreated)
+	// Get the ID of the newly inserted entry
+	insertedID, err := result.LastInsertId()
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+
+	// Return the ID as a response
+	c.JSON(http.StatusCreated, gin.H{"id": insertedID})
+}
+
+func GetAllWorkSessions(c *gin.Context, db *database.DB) {
+	GetAll(c, db, WorkSession{})
 }
 
 // GetAll handles GET requests to retrieve entities
-func GetAll(c *gin.Context, db *database.DB) {
-	query := utils.SQL_SELECT(WorkSession{}, "work_session_project_view")
-	fmt.Println(query)
+func GetAll(c *gin.Context, db *database.DB, entity interface{}) {
+	query := utils.SQL_SELECT(entity, "work_session_project_view")
 
 	ctx := context.Background()
-	var entities []*WorkSession
+	var entities []*interface{}
 	sqlscan.Select(ctx, db, &entities, query)
 
 	c.JSON(http.StatusOK, entities)
