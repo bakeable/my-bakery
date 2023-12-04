@@ -5,7 +5,7 @@ interface DarkModeState {
 }
 
 const initialState: DarkModeState = {
-  isEnabled: false,
+  isEnabled: true
 }
 
 export const styleSlice = createSlice({
@@ -23,11 +23,6 @@ export const styleSlice = createSlice({
           'dark-scrollbars-compat'
         )
       }
-
-      // You can persist dark mode setting
-      // if (typeof localStorage !== 'undefined') {
-      //   localStorage.setItem('darkMode', state.darkMode ? '1' : '0')
-      // }
     },
   },
 })

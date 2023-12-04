@@ -12,6 +12,8 @@ import { api } from '../../api';
 import CardBoxWidget from '../../components/CardBox/Widget';
 import { WorkSession } from '../../interfaces';
 import { mdiClockOutline, mdiListBox, mdiBank, mdiClock } from '@mdi/js';
+import CardBoxCurrentTask from '../../components/CardBox/CurrentTask';
+import CardBoxTask from '../../components/CardBox/Task';
 
 const WorkSessionPage = () => {
   const router = useRouter();
@@ -59,6 +61,20 @@ const WorkSessionPage = () => {
     return () => clearInterval(intervalId);
   }, [workSession.started_timestamp]);
   
+  const task = {
+    "id": "1", 
+    "description":"Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. ", 
+    "created_timestamp": "2023-12-04 09:00:00", 
+    "finished_timestamp": null, 
+    "started_timestamp": null,
+    "earned_amount": 30, 
+    "project_id": 1,
+    "project_name": "Administratie",
+    "title": "BTW AAngifte",
+    "hours": 2,
+    "priority": 5,
+    "status": "active" as any,
+  }
 
   return (
     <>
@@ -71,32 +87,40 @@ const WorkSessionPage = () => {
 
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-3 mb-6">
           <CardBoxWidget
-            trendLabel={`Totaal: ${timeWorked} gewerkt`}
-            trendType="info"
-            trendColor="success"
             icon={mdiClockOutline}
             iconColor="info"
             number={timeWorked}
             label="Gewerkt"
           />
           <CardBoxWidget
-            trendLabel={`Totaal: ${amountEarned} verdiend`}
-            trendType="up"
-            trendColor="success"
             icon={mdiBank}
             iconColor="danger"
             number={amountEarned}
             label="Verdiend"
           />
           <CardBoxWidget
-            trendLabel={`Totaal: 100 taken afgerond`}
-            trendType="up"
-            trendColor="success"
             icon={mdiListBox}
             iconColor="success"
             number={0}
             label="Afgerond"
           />
+        </div>
+
+        <SectionTitle title="Takenlijst" main icon={mdiListBox} />
+
+        <CardBoxCurrentTask task={task} />
+
+
+        <div className="grid grid-cols-1 gap-6 lg:grid-cols-4 mb-6">
+          <CardBoxTask task={task} />
+          <CardBoxTask task={task} />
+          <CardBoxTask task={task} />
+          <CardBoxTask task={task} />
+          <CardBoxTask task={task} />
+          <CardBoxTask task={task} />
+          <CardBoxTask task={task} />
+          <CardBoxTask task={task} />
+          <CardBoxTask task={task} />
         </div>
       </SectionMain>
     </>

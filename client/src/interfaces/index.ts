@@ -1,6 +1,6 @@
-import { Project, Customer, WorkSession } from './entities'
+import { Project, Customer, WorkSession, Task } from './entities'
 
-export type { Project, Customer, WorkSession }
+export type { Project, Customer, Task, WorkSession }
 
 export type UserPayloadObject = {
   name: string

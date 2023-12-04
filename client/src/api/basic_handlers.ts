@@ -1,24 +1,21 @@
-import { testData } from "./test_data"
-
-
 const endpoint = process.env.REACT_APP_API_ENDPOINT || 'http://localhost:4040/api'
 
-export const fetch = async (path: string, config?: any) => {
-    console.log(path.split(endpoint).pop())
+// export const fetch = async (path: string, config?: any) => {
+//     console.log(path.split(endpoint).pop())
     
-    console.log(config)
-    return {
-        json: async () => {
-            if (!config || config.methods === "GET") {
-                return testData[path.split(endpoint).pop()]
-            }
-            if (config?.method === "POST") {
-                return { id: 1 }
-            }
-            return []
-        },
-    }
-}
+//     console.log(config)
+//     return {
+//         json: async () => {
+//             if (!config || config.methods === "GET") {
+//                 return testData[path.split(endpoint).pop()]
+//             }
+//             if (config?.method === "POST") {
+//                 return { id: 1 }
+//             }
+//             return []
+//         },
+//     }
+// }
 
 export const buildPath = (path: string, ids: string | string[]): string[] => {
     while (path.includes(':id')) {

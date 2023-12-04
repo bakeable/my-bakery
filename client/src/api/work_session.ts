@@ -1,4 +1,4 @@
-import { basicHandlers, fetch } from "./basic_handlers"
+import { basicHandlers } from "./basic_handlers"
 
 const startWorkSession = async (data: any) => {
     const endpoint = process.env.REACT_APP_API_ENDPOINT || 'http://localhost:4040/api'

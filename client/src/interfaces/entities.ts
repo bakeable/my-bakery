@@ -27,3 +27,19 @@ export type WorkSession = {
   hours: number
   earned_amount: number
 }
+
+export type Task = {
+  id: string
+  created_timestamp: string
+  description: string
+  earned_amount: number
+  finished_timestamp: string
+  hours: number
+  priority: number
+  project_id: number
+  project_name: string
+  started_timestamp: string
+  status: 'concept' | 'active' | 'done'
+  title: string
+
+}
