@@ -10,10 +10,8 @@ CREATE TABLE IF NOT EXISTS tasks (
     created_timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     finished_timestamp TIMESTAMP NULL,
     priority INT,
-    due_date DATE,
+    due_date DATE NULL,
     started_timestamp TIMESTAMP,
-    session_id INT,
     hours DECIMAL(10,2) NULL,
-    FOREIGN KEY (session_id) REFERENCES sessions(id),
     FOREIGN KEY (project_id) REFERENCES projects(id)
 );

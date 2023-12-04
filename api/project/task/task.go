@@ -12,6 +12,5 @@ type Task struct {
 	ProjectID         int     `json:"project_id" insert:"true" retrieve:"true"`
 	StartedTimestamp  string  `json:"started_timestamp" insert:"true" retrieve:"true"`
 	Status            string  `json:"status" insert:"true" retrieve:"true"`
-	SessionId         int     `json:"session_id" insert:"true" retrieve:"true"`
 	Title             string  `json:"title" insert:"true" retrieve:"true"`
 }
