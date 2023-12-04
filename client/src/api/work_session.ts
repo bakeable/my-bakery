@@ -1,25 +1,6 @@
-export const getWorkSessions = async () => {
-    const endpoint = process.env.REACT_APP_API_ENDPOINT || 'http://localhost:4040/api'
-    const res = await fetch(`${endpoint}/work_session`)
-    return await res.json()
-}
+import { basicHandlers, fetch } from "./basic_handlers"
 
-export const getWorkSession = async (id: string) => {
-    const endpoint = process.env.REACT_APP_API_ENDPOINT || 'http://localhost:4040/api'
-    const res = await fetch(`${endpoint}/work_session/${id}`)
-    return await res.json()
-}
-
-export const createWorkSession = async (data: any) => {
-    const endpoint = process.env.REACT_APP_API_ENDPOINT || 'http://localhost:4040/api'
-    const res = await fetch(`${endpoint}/work_session`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(serialize(data)),
-    })
-    return res
-}
-export const startWorkSession = async (data: any) => {
+const startWorkSession = async (data: any) => {
     const endpoint = process.env.REACT_APP_API_ENDPOINT || 'http://localhost:4040/api'
 
     const res = await fetch(`${endpoint}/work_session`, {
@@ -30,20 +11,12 @@ export const startWorkSession = async (data: any) => {
     return res.json()
 }
 
-export const updateWorkSession = async (id: string, data: any) => {
+const updateWorkSession = async (id: string, data: any) => {
     const endpoint = process.env.REACT_APP_API_ENDPOINT || 'http://localhost:4040/api'
     const res = await fetch(`${endpoint}/work_session/${id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(serialize(preprocess(data))),
-    })
-    return res
-}
-
-export const deleteWorkSession = async (id: string) => {
-    const endpoint = process.env.REACT_APP_API_ENDPOINT || 'http://localhost:4040/api'
-    const res = await fetch(`${endpoint}/work_session/${id}`, {
-        method: 'DELETE',
     })
     return res
 }
@@ -88,4 +61,10 @@ const serialize = (obj: any) => {
         ...obj,
         project_id: parseInt(obj.project_id),
     }
+}
+
+export const workSessionHandlers = {
+    ...basicHandlers('WorkSession', '/work_session', serialize),
+    startWorkSession,
+    updateWorkSession,
 }

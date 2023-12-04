@@ -14,7 +14,9 @@ const TableProjects = () => {
 
   const [projects, setProjects] = useState<Project[]>([]);
   useEffect(() => {
+    console.log('api', api)
     api.getProjects().then((projects) => {
+      console.log(projects)
       setProjects(projects || []);
     });
   }, []);
