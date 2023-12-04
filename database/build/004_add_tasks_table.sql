@@ -8,10 +8,10 @@ CREATE TABLE IF NOT EXISTS tasks (
     status VARCHAR(50),
     commit_id VARCHAR(50) NULL,
     created_timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    finished_timestamp TIMESTAMP NULL,
+    finished_timestamp DATETIME DEFAULT NULL,
     priority INT,
     due_date DATE NULL,
-    started_timestamp TIMESTAMP,
+    started_timestamp DATETIME DEFAULT NULL,
     hours DECIMAL(10,2) NULL,
     FOREIGN KEY (project_id) REFERENCES projects(id)
 );

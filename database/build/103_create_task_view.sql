@@ -5,6 +5,6 @@ SELECT
     CAST(p.wage * t.hours AS DECIMAL(10, 2)) AS earned_amount,
     t.*
 FROM 
-    tasms AS t
+    tasks AS t
 JOIN 
     projects AS p ON t.project_id = p.id;
