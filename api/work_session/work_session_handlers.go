@@ -13,18 +13,14 @@ import (
 // Variable declaration
 const tableName = "work_sessions"
 
-func AddWorkSession(c *gin.Context, db *database.DB) {
+// Add handles POST requests to add a new entity
+func Add(c *gin.Context, db *database.DB) {
 	var entity WorkSession
 	if err := c.ShouldBindJSON(&entity); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
 
-	Add(c, db, entity)
-}
-
-// Add handles POST requests to add a new entity
-func Add(c *gin.Context, db *database.DB, entity interface{}) {
 	query, values := utils.SQL_INSERT(entity, tableName)
 
 	result, err := db.Exec(query, values...)
@@ -44,13 +40,9 @@ func Add(c *gin.Context, db *database.DB, entity interface{}) {
 	c.JSON(http.StatusCreated, gin.H{"id": insertedID})
 }
 
-func GetAllWorkSessions(c *gin.Context, db *database.DB) {
-	GetAll(c, db, WorkSession{})
-}
-
 // GetAll handles GET requests to retrieve entities
-func GetAll(c *gin.Context, db *database.DB, entity interface{}) {
-	query := utils.SQL_SELECT(entity, "work_session_project_view")
+func GetAll(c *gin.Context, db *database.DB) {
+	query := utils.SQL_SELECT(WorkSession{}, "work_session_project_view")
 
 	ctx := context.Background()
 	var entities []*interface{}

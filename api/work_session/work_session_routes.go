@@ -11,10 +11,10 @@ func InitRoutes(r *gin.RouterGroup, db *database.DB) {
 	group := r.Group("/work_session")
 	{
 		group.POST("", func(c *gin.Context) {
-			AddWorkSession(c, db)
+			Add(c, db)
 		})
 		group.GET("", func(c *gin.Context) {
-			GetAllWorkSessions(c, db)
+			GetAll(c, db)
 		})
 		group.GET("/:id", func(c *gin.Context) {
 			Get(c, db)
