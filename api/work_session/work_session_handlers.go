@@ -45,7 +45,7 @@ func GetAll(c *gin.Context, db *database.DB) {
 	query := utils.SQL_SELECT(WorkSession{}, "work_session_project_view")
 
 	ctx := context.Background()
-	var entities []*interface{}
+	var entities []*WorkSession
 	sqlscan.Select(ctx, db, &entities, query)
 
 	c.JSON(http.StatusOK, entities)

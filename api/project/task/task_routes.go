@@ -8,7 +8,7 @@ import (
 
 func InitRoutes(r *gin.RouterGroup, db *database.DB) {
 
-	group := r.Group("/task")
+	group := r.Group("/:projectId/task")
 	{
 		group.POST("", func(c *gin.Context) {
 			Add(c, db)

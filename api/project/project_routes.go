@@ -27,8 +27,8 @@ func InitRoutes(r *gin.RouterGroup, db *database.DB) {
 		group.DELETE("/:projectId", func(c *gin.Context) {
 			Delete(c, db)
 		})
-
-		// Nested routes
-		task.InitRoutes(group, db)
 	}
+
+	// Nested routes
+	task.InitRoutes(group, db)
 }
