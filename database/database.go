@@ -18,7 +18,7 @@ func InitDB() *DB {
 	var db *sql.DB
 	var err error
 
-	for i := 0; i < 5; i++ {
+	for i := 0; i < 10; i++ {
 		db, err = sql.Open("mysql", "root:my-secret-pw@tcp(my-bakery-db:3306)/mydb")
 		if err == nil {
 			err = db.Ping()
@@ -28,7 +28,7 @@ func InitDB() *DB {
 			}
 		}
 		fmt.Println("Retrying database connection...")
-		time.Sleep(10 * time.Second) // Wait for 5 seconds before retrying
+		time.Sleep(5 * time.Second) // Wait for 5 seconds before retrying
 	}
 	panic("Failed to connect to database: " + err.Error())
 }
